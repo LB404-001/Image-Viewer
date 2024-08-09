@@ -6,8 +6,9 @@ namespace Image_Viewer
     public partial class Form : System.Windows.Forms.Form
     {
 
-        static string PathToFile;
+        
         static string WorkingDir = "./galleries";
+        static string PathToFile = WorkingDir;
         static string filename;
         static Image Image;
         static int PageNumber = 0;
@@ -18,6 +19,7 @@ namespace Image_Viewer
         private static bool IsDark = true;
         static string[] galleries;
         static bool ActiveGalleryListingOn = true;
+        static bool UpdatePagesOn = true;
 
         public Form()
         {
@@ -32,7 +34,7 @@ namespace Image_Viewer
             {
                 GalleryListing();
             }
-            PageNumberList.Text = PageNumber.ToString();
+            
         }
 
         private void GalleryListing()
@@ -75,12 +77,6 @@ namespace Image_Viewer
             {
                 files = Directory.GetFiles(PathToFile);
                 CountOfPages = files.Length;
-
-                for (int i = 1; i <= files.Length; i++)
-                {
-                    PageNumberList.Items.Add(i);
-                }
-
 
                 Number.Text = PageNumber.ToString() + " / " + CountOfPages.ToString();
 
@@ -151,10 +147,23 @@ namespace Image_Viewer
                     Error.Text = "Unknown Error when unpacking";
                 }
                 UpdateState();
+                //PageNumberList.Items.Clear();
                 string str = GalleryList.Items[GalleryList.Items.Count - 1].ToString();
                 GalleryList.Text = str;
 
                 Show();
+
+                if (UpdatePagesOn)
+                {
+                    PageNumberList.Items.Clear();
+
+                    for (int ii = 1; ii <= files.Length; ii++)
+                    {
+                        PageNumberList.Items.Add(ii);
+                    }
+                    PageNumberList.Text = PageNumber.ToString();
+                }
+                UpdatePagesOn = true;
             }
             else if (Directory.Exists(PathToFile))
             {
@@ -201,6 +210,7 @@ namespace Image_Viewer
                 Error.ForeColor = System.Drawing.Color.FromArgb(0xDC143C);
                 Error.Text = "Unknown Error";
             }
+            UpdatePagesOn = false;
             UpdateState();
         }
 
