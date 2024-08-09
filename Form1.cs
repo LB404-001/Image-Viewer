@@ -520,7 +520,19 @@ namespace Image_Viewer
             GalleryList.Text = str;
             PageNumber = 1;
             PageNumberList.Text = PageNumber.ToString();
+
             Show();
+            if (UpdatePagesOn)
+            {
+                PageNumberList.Items.Clear();
+
+                for (int ii = 1; ii <= files.Length; ii++)
+                {
+                    PageNumberList.Items.Add(ii);
+                }
+                PageNumberList.Text = PageNumber.ToString();
+            }
+            UpdatePagesOn = true;
         }
     }
 }
