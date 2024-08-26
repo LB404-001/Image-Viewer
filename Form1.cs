@@ -40,7 +40,6 @@ namespace Image_Viewer
         private void GalleryListing()
         {
             string str = "";
-            //str = PathToFileBox.Text.Replace(WorkingDir + "\\", "");
             
             if (Directory.Exists(WorkingDir))
             {
@@ -110,7 +109,6 @@ namespace Image_Viewer
             PageNumber = 1;
             Image img;
 
-            //string t = PathToFile.Substring(PathToFile.Length - 4);
             int x = Array.IndexOf(DirFormats, PathToFile.Substring(PathToFile.Length - 4));
 
             if (x != -1)
@@ -147,7 +145,6 @@ namespace Image_Viewer
                     Error.Text = "Unknown Error when unpacking";
                 }
                 UpdateState();
-                //PageNumberList.Items.Clear();
                 string str = GalleryList.Items[GalleryList.Items.Count - 1].ToString();
                 GalleryList.Text = str;
 
@@ -182,17 +179,6 @@ namespace Image_Viewer
             try
             {
                 PageNumber = Convert.ToInt32(PageNumberList.SelectedIndex) + 1;
-                ////PageNumberList.Text = Convert.ToString(PageNumber);
-                //Number.Text = PageNumber.ToString() + " / " + CountOfPages.ToString();
-
-                ////string[] a = files;
-                ////int aa = PageNumber;
-
-                //Image = Image.FromFile(files[PageNumber - 1]);
-                //ImageBox.Image = Image;
-                //Image = null;
-                //ImageBox.Focus();
-                //System.GC.Collect();
                 Show();
             }
             catch (IOException)
@@ -221,13 +207,6 @@ namespace Image_Viewer
                 if (PageNumber < CountOfPages)
                 {
                     PageNumber++;
-                    //Number.Text = PageNumber.ToString() + " / " + CountOfPages.ToString();
-
-                    //Image = Image.FromFile(files[PageNumber - 1]);
-                    //ImageBox.Image = Image;
-                    //Image = null;
-                    //ImageBox.Focus();
-                    //System.GC.Collect();
                     Show();
                 }
                 
@@ -257,13 +236,6 @@ namespace Image_Viewer
                 if (PageNumber > 1)
                 {
                     PageNumber--;
-                    //Number.Text = PageNumber.ToString() + " / " + CountOfPages.ToString();
-
-                    //Image = Image.FromFile(files[PageNumber - 1]);
-                    //ImageBox.Image = Image;
-                    //Image = null;
-                    //ImageBox.Focus();
-                    //System.GC.Collect();
                     Show();
                 }
                 
@@ -291,13 +263,6 @@ namespace Image_Viewer
             try
             {
                 PageNumber = CountOfPages;
-                //Number.Text = PageNumber.ToString() + " / " + CountOfPages.ToString();
-
-                //Image = Image.FromFile(files[PageNumber - 1]);
-                //ImageBox.Image = Image;
-                //Image = null;
-                //ImageBox.Focus();
-                //System.GC.Collect();
                 Show();
             }
             catch (IOException)
@@ -323,13 +288,6 @@ namespace Image_Viewer
             try
             {
                 PageNumber = 1;
-                //Number.Text = PageNumber.ToString() + " / " + CountOfPages.ToString();
-
-                //Image = Image.FromFile(files[PageNumber - 1]);
-                //ImageBox.Image = Image;
-                //Image = null;
-                //ImageBox.Focus();
-                //System.GC.Collect();
                 Show();
             }
             catch (IOException)
@@ -461,7 +419,6 @@ namespace Image_Viewer
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
             PathToFileBox.Text = files[0].ToString();
-            //filename = files[0].ToString();
             files = files[0].ToString().Split(new char[] { '\\' });
             zipFileLoaderText.Text = files[files.Length - 1].ToString();
             filename = zipFileLoaderText.Text;
@@ -511,12 +468,9 @@ namespace Image_Viewer
         private void GalleryList_SelectedIndexChanged(object sender, EventArgs e)
         {
             PathToFile = WorkingDir + "/" + GalleryList.Items[GalleryList.SelectedIndex].ToString();
-            //GalleryList.Text = GalleryList.Items[GalleryList.SelectedIndex].ToString();
             string str = GalleryList.Items[GalleryList.SelectedIndex].ToString();
             PathToFileBox.Text = PathToFile;
             PageNumber = 1;
-            //Show();
-            //UpdateState();
             GalleryList.Text = str;
             PageNumber = 1;
             PageNumberList.Text = PageNumber.ToString();
